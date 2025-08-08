@@ -98,23 +98,17 @@ export const AdvancedFilters = ({ onFiltersChange, currentFilters, onQuickSort }
 
   const getSelectedCategory = () => {
     if (!localFilters.category) return null;
-    
-    for (const category of categories) {
-      if (category.id === localFilters.category) return category;
-      if (category.subcategories) {
-        const subcategory = category.subcategories.find(sub => sub.id === localFilters.category);
-        if (subcategory) return subcategory;
-      }
-    }
-    return null;
+    // localFilters.category хранит НАЗВАНИЕ категории
+    const parentByName = categories.find(cat => cat.name === localFilters.category);
+    return parentByName || null;
   };
 
   const getSelectedSubcategory = () => {
     if (!localFilters.subcategory) return null;
-    
+    // localFilters.subcategory хранит НАЗВАНИЕ подкатегории
     for (const category of categories) {
       if (category.subcategories) {
-        const subcategory = category.subcategories.find(sub => sub.id === localFilters.subcategory);
+        const subcategory = category.subcategories.find(sub => sub.name === localFilters.subcategory);
         if (subcategory) return subcategory;
       }
     }
@@ -124,23 +118,33 @@ export const AdvancedFilters = ({ onFiltersChange, currentFilters, onQuickSort }
   const handleCategoryChange = (categoryValue: string) => {
     const categoryName = categoryValue === 'all' ? null : 
                         categories.find(cat => cat.id === categoryValue)?.name || null;
-    setLocalFilters(prev => ({
-      ...prev,
+    
+    console.log('🔄 СМЕНА КАТЕГОРИИ:');
+    console.log('   categoryValue:', categoryValue);
+    console.log('   categoryName:', categoryName);
+    
+    const newFilters: FilterState = {
+      ...localFilters,
       category: categoryName,
-      subcategory: null // Сбрасываем подкатегорию при смене категории
-    }));
+      subcategory: null, // Сбрасываем подкатегорию при смене категории
+    };
+    setLocalFilters(newFilters);
+    onFiltersChange(newFilters);
   };
 
   const handleSubcategoryChange = (subcategoryValue: string) => {
     if (subcategoryValue === 'all') {
-      setLocalFilters(prev => ({
-        ...prev,
-        subcategory: null
-      }));
+      console.log('🔄 СМЕНА ПОДКАТЕГОРИИ: Убираем подкатегорию (all)');
+      const newFilters: FilterState = {
+        ...localFilters,
+        subcategory: null,
+      };
+      setLocalFilters(newFilters);
+      onFiltersChange(newFilters);
     } else {
       // Находим подкатегорию и её родительскую категорию
-      let parentCategoryName = null;
-      let subcategoryName = null;
+      let parentCategoryName = null as string | null;
+      let subcategoryName = null as string | null;
       
       for (const category of categories) {
         const foundSubcategory = category.subcategories?.find(sub => sub.id === subcategoryValue);
@@ -151,35 +155,46 @@ export const AdvancedFilters = ({ onFiltersChange, currentFilters, onQuickSort }
         }
       }
       
-      setLocalFilters(prev => ({
-        ...prev,
+      console.log('🔄 СМЕНА ПОДКАТЕГОРИИ:');
+      console.log('   subcategoryValue:', subcategoryValue);
+      console.log('   parentCategoryName:', parentCategoryName);
+      console.log('   subcategoryName:', subcategoryName);
+      
+      const newFilters: FilterState = {
+        ...localFilters,
         category: parentCategoryName,
-        subcategory: subcategoryName
-      }));
+        subcategory: subcategoryName,
+      };
+      setLocalFilters(newFilters);
+      onFiltersChange(newFilters);
     }
   };
 
   const handleSortChange = (sortBy: 'name' | 'price' | 'date', sortOrder: 'asc' | 'desc') => {
-    setLocalFilters(prev => ({
-      ...prev,
+    const newFilters: FilterState = {
+      ...localFilters,
       sortBy,
-      sortOrder
-    }));
+      sortOrder,
+    };
+    setLocalFilters(newFilters);
+    onFiltersChange(newFilters);
   };
 
   const handlePriceRangeChange = (field: 'min' | 'max', value: string) => {
     const numValue = value === '' ? null : parseInt(value);
-    setLocalFilters(prev => ({
-      ...prev,
+    const newFilters: FilterState = {
+      ...localFilters,
       priceRange: {
-        ...prev.priceRange,
-        [field]: numValue
-      }
-    }));
+        ...localFilters.priceRange,
+        [field]: numValue,
+      },
+    };
+    setLocalFilters(newFilters);
+    onFiltersChange(newFilters);
   };
 
   const applyFilters = () => {
-    onFiltersChange(localFilters);
+    // Фильтры уже применяются мгновенно; эта кнопка просто закрывает окно
     setIsOpen(false);
   };
 

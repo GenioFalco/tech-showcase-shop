@@ -70,18 +70,33 @@ export const CatalogSection = ({
       
       if (error) throw error;
       
-      const formattedProducts = data.map(product => ({
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        image: product.image,
-        image2: product.image2,
-        image3: product.image3,
-        category: product.category,
-        subcategory: product.subcategory,
-        inStock: product.in_stock
-      }));
+      const formattedProducts = data.map(product => {
+        // Нормализуем, если category сохранена как "Parent > Sub"
+        let normalizedCategory: string = product.category;
+        let normalizedSubcategory: string | undefined = product.subcategory || undefined;
+        if ((!normalizedSubcategory || normalizedSubcategory === '') && typeof normalizedCategory === 'string' && normalizedCategory.includes(' > ')) {
+          const [parentRaw, subRaw] = normalizedCategory.split('>');
+          const parent = (parentRaw || '').trim();
+          const sub = (subRaw || '').trim();
+          if (parent && sub) {
+            normalizedCategory = parent;
+            normalizedSubcategory = sub;
+          }
+        }
+
+        return {
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          image: product.image,
+          image2: product.image2,
+          image3: product.image3,
+          category: normalizedCategory,
+          subcategory: normalizedSubcategory,
+          inStock: product.in_stock,
+        };
+      });
       
       setProducts(formattedProducts);
       console.log('Товары загружены:', formattedProducts.length);
@@ -93,16 +108,29 @@ export const CatalogSection = ({
 
 
 
+  const normalize = (value: string | null | undefined) =>
+    typeof value === 'string' ? value.trim().toLowerCase() : null;
+
   const filteredProducts = useMemo(() => {
+    console.log('🔍 ФИЛЬТРАЦИЯ: Начинаем фильтрацию');
+    console.log('📦 Всего товаров:', products.length);
+    console.log('⚙️ Текущие фильтры:', filters);
+    
     let filtered = [...products];
 
     // Логика фильтрации по категориям и подкатегориям
     if (filters.subcategory) {
+      console.log('🏷️ Фильтруем по подкатегории:', filters.subcategory);
       // Если выбрана подкатегория - показываем только товары этой подкатегории
-      filtered = filtered.filter(product => product.subcategory === filters.subcategory);
+      const target = normalize(filters.subcategory);
+      filtered = filtered.filter(product => normalize(product.subcategory) === target);
+      console.log('📋 Товаров после фильтра по подкатегории:', filtered.length);
     } else if (filters.category) {
+      console.log('📂 Фильтруем по категории:', filters.category);
       // Если выбрана только категория - показываем все товары этой категории (включая все подкатегории)
-      filtered = filtered.filter(product => product.category === filters.category);
+      const target = normalize(filters.category);
+      filtered = filtered.filter(product => normalize(product.category) === target);
+      console.log('📋 Товаров после фильтра по категории:', filtered.length);
     }
 
     // Фильтр по цене
@@ -143,6 +171,9 @@ export const CatalogSection = ({
       return filters.sortOrder === 'desc' ? -comparison : comparison;
     });
 
+    console.log('✅ ИТОГО отфильтровано товаров:', filtered.length);
+    console.log('📋 Список отфильтрованных товаров:', filtered.map(p => `${p.name} (${p.category}/${p.subcategory})`));
+    
     return filtered;
   }, [products, filters, searchQuery]);
 

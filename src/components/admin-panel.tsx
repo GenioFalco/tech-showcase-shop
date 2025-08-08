@@ -51,18 +51,33 @@ export const AdminPanel = ({ onProductsUpdate, onLogout }: AdminPanelProps) => {
       
       if (error) throw error;
       
-      const formattedProducts = data.map(product => ({
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        image: product.image,
-        image2: product.image2,
-        image3: product.image3,
-        category: product.category,
-        subcategory: product.subcategory,
-        in_stock: product.in_stock
-      }));
+      const formattedProducts = data.map(product => {
+        // Нормализуем категорию и подкатегорию, если категория сохранена как "Parent > Sub"
+        let normalizedCategory = product.category as string | null;
+        let normalizedSubcategory = product.subcategory as string | null;
+        if ((!normalizedSubcategory || normalizedSubcategory === '') 
+            && typeof normalizedCategory === 'string' 
+            && normalizedCategory.includes(' > ')) {
+          const parts = normalizedCategory.split('>');
+          const parent = (parts[0] || '').trim();
+          const sub = (parts[1] || '').trim();
+          normalizedCategory = parent || normalizedCategory;
+          normalizedSubcategory = sub || null;
+        }
+
+        return {
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          image: product.image,
+          image2: product.image2,
+          image3: product.image3,
+          category: normalizedCategory || product.category,
+          subcategory: normalizedSubcategory || product.subcategory,
+          in_stock: product.in_stock,
+        };
+      });
       
       setProducts(formattedProducts);
       onProductsUpdate(formattedProducts);
@@ -278,10 +293,28 @@ export const AdminPanel = ({ onProductsUpdate, onLogout }: AdminPanelProps) => {
                       />
                     </div>
                     <div>
-                      <CategorySelector
-                        value={editForm.category}
-                        onChange={(category) => setEditForm({...editForm, category})}
-                      />
+                      {(() => {
+                        const currentPath = editForm.subcategory 
+                          ? `${editForm.category || ''} > ${editForm.subcategory}`
+                          : (editForm.category || '');
+                        return (
+                          <CategorySelector
+                            value={currentPath}
+                            onChange={(path) => {
+                              if (!path) {
+                                setEditForm({ ...editForm, category: undefined, subcategory: undefined });
+                                return;
+                              }
+                              if (path.includes(' > ')) {
+                                const [parent, sub] = path.split(' > ').map(p => p.trim());
+                                setEditForm({ ...editForm, category: parent, subcategory: sub });
+                              } else {
+                                setEditForm({ ...editForm, category: path, subcategory: undefined });
+                              }
+                            }}
+                          />
+                        );
+                      })()}
                     </div>
                     <div className="md:col-span-2">
                       <div className="space-y-4">
