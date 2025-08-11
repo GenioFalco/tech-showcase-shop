@@ -36,7 +36,7 @@ export const AboutSection = () => {
               О компании
             </Badge>
             <h2 className="text-3xl font-bold mb-4 bg-gradient-hero bg-clip-text text-transparent">
-              Почему выбирают x-brand?
+              Почему выбирают тысяча мелочей?
             </h2>
             <p className="text-lg text-muted-foreground">
               Мы продаем качественную проверенную техниу и аксессуары по выгодным ценам. 
@@ -49,7 +49,7 @@ export const AboutSection = () => {
             <CardContent className="p-8">
               <div className="prose prose-lg max-w-none">
                 <p className="text-foreground leading-relaxed mb-6">
-                  <strong>x-brand</strong> — это современный интернет-магазин проверенной техники и аксессуаров, 
+                  <strong>тысяча мелочей</strong> — это современный интернет-магазин проверенной техники и аксессуаров, 
                   который предлагает широкий ассортимент качественных товаров по доступным ценам. 
                   Мы специализируемся на продаже смартфонов, наушников, зарядных устройств, 
                   бытовой техники и современных гаджетов.

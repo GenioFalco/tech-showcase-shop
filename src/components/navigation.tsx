@@ -38,7 +38,7 @@ export const Navigation = ({
             onClick={() => onSectionChange('home')}
           >
             <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">X</span>
+              <span className="text-white font-bold text-sm">Т</span>
             </div>
             <span className="text-xl font-bold bg-gradient-hero bg-clip-text text-transparent">
               тысяча мелочей
