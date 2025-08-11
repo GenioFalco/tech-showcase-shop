@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { 
   MessageCircle, 
   Phone, 
-  Mail, 
   Instagram,
   MapPin,
   Shield,
@@ -58,10 +57,6 @@ export const Footer = () => {
               <div className="flex items-center text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 mr-2" />
                 +7 (910) 356-11-90
-              </div>
-              <div className="flex items-center text-sm text-muted-foreground">
-                <Mail className="w-4 h-4 mr-2" />
-                info@technomarket.ru
               </div>
             </div>
           </div>

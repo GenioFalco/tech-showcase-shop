@@ -99,37 +99,7 @@ export const ProductDetailModal = ({
     ...(product.image3 ? [product.image3] : [])
   ].filter(Boolean);
   
-  // Имитируем характеристики товара
-  const getProductFeatures = (product: Product) => {
-    const baseFeatures = [
-      { label: "Гарантия", value: "12 месяцев" },
-      { label: "Доставка", value: "1-3 дня" },
-      { label: "Возврат", value: "14 дней" }
-    ];
-
-    // Добавляем специфичные характеристики в зависимости от категории
-    if (product.category === "Электроника" || product.category === "Зарядные устройства") {
-      return [
-        ...baseFeatures,
-        { label: "Тип подключения", value: "USB-C / Lightning" },
-        { label: "Мощность", value: "15-65W" },
-        { label: "Совместимость", value: "iPhone, Android" }
-      ];
-    }
-
-    if (product.category === "Аудио") {
-      return [
-        ...baseFeatures,
-        { label: "Подключение", value: "Bluetooth 5.0" },
-        { label: "Время работы", value: "6-8 часов" },
-        { label: "Дальность", value: "10 метров" }
-      ];
-    }
-
-    return baseFeatures;
-  };
-
-  const features = getProductFeatures(product);
+  // Характеристики временно скрыты
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -241,20 +211,7 @@ export const ProductDetailModal = ({
               </div>
             </div>
 
-            <Separator />
-
-            {/* Характеристики */}
-            <div className="space-y-3">
-              <h3 className="font-semibold">Характеристики</h3>
-              <div className="grid grid-cols-1 gap-2">
-                {features.map((feature, index) => (
-                  <div key={index} className="flex justify-between py-1">
-                    <span className="text-muted-foreground">{feature.label}:</span>
-                    <span className="font-medium">{feature.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Характеристики временно скрыты */}
 
             <Separator />
 

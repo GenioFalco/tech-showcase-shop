@@ -7,11 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { 
   MessageCircle, 
   Phone, 
-  Mail, 
   Instagram, 
   MapPin, 
-  Clock,
-  Send
+  Clock
 } from "lucide-react";
 
 export const ContactsSection = () => {
@@ -20,10 +18,6 @@ export const ContactsSection = () => {
     window.open('https://wa.me/79103561190', '_blank');
   };
 
-
-  const handleEmailContact = () => {
-    window.open('mailto:info@technomarket.ru', '_blank');
-  };
 
   const handlePhoneContact = () => {
     window.open('tel:+79103561190', '_blank');
@@ -95,14 +89,7 @@ export const ContactsSection = () => {
                     +7 (910) 356-11-90
                   </Button>
 
-                  <Button 
-                    variant="outline" 
-                    onClick={handleEmailContact}
-                    className="justify-start w-full"
-                  >
-                    <Mail className="w-4 h-4 mr-3" />
-                    info@technomarket.ru
-                  </Button>
+                  {/* Email временно скрыт */}
 
                 
                 </CardContent>
@@ -136,52 +123,7 @@ export const ContactsSection = () => {
               </Card>
             </div>
 
-            {/* Форма обратной связи */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Send className="w-5 h-5 text-primary" />
-                  Написать нам
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="name">Имя</Label>
-                      <Input id="name" placeholder="Ваше имя" />
-                    </div>
-                    <div>
-                      <Label htmlFor="phone">Телефон</Label>
-                      <Input id="phone" placeholder="+7 (999) 999-99-99" />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="example@email.com" />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="message">Сообщение</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Опишите ваш вопрос или пожелание..."
-                      rows={4}
-                    />
-                  </div>
-                  
-                  <Button className="w-full" size="lg">
-                    <Send className="w-4 h-4 mr-2" />
-                    Отправить сообщение
-                  </Button>
-                  
-                  <p className="text-xs text-muted-foreground text-center">
-                    Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
-                  </p>
-                </form>
-              </CardContent>
-            </Card>
+            {/* Форма обратной связи временно скрыта */}
           </div>
 
           {/* Дополнительная информация */}
