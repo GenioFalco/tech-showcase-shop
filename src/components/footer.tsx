@@ -32,7 +32,7 @@ export const Footer = () => {
               <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">Т</span>
               </div>
-              <span className="text-xl font-bold">x-brand</span>
+              <span className="text-xl font-bold">тысяча мелочей</span>
             </div>
             <p className="text-sm text-muted-foreground">
             Подборка проверенной техники и полезных товаров: смартфоны, аксессуары, решения для дома и спорта. Честные цены, быстрая доставка и официальная гарантия.
@@ -123,7 +123,7 @@ export const Footer = () => {
 
         {/* Копирайт */}
         <div className="text-center text-sm text-muted-foreground">
-          <p>© {currentYear} x-brand. Все права защищены.</p>
+          <p>© {currentYear} тысяча мелочей. Все права защищены.</p>
           <p className="mt-1">
             Информация на сайте не является публичной офертой
           </p>

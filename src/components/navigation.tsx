@@ -41,7 +41,7 @@ export const Navigation = ({
               <span className="text-white font-bold text-sm">X</span>
             </div>
             <span className="text-xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-              x-brand
+              тысяча мелочей
             </span>
           </div>
 

@@ -17,7 +17,7 @@ export const HeroSection = ({ onShopNow }: HeroSectionProps) => {
           </Badge>
           
           <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-            x-brand — электроника и аксессуары
+            тысяча мелочей — электроника и аксессуары
           </h1>
           
           <p className="mb-8 text-xl text-blue-100 lg:text-2xl">

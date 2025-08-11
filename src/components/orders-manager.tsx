@@ -71,7 +71,12 @@ export const OrdersManager = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setOrders(data || []);
+      // Parse JSON items for each order
+      const parsedOrders = (data || []).map(order => ({
+        ...order,
+        items: typeof order.items === 'string' ? JSON.parse(order.items) : order.items || []
+      }));
+      setOrders(parsedOrders);
     } catch (error) {
       console.error('Error fetching orders:', error);
       toast({
