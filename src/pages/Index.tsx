@@ -94,8 +94,8 @@ const Index = () => {
     const message = `Здравствуйте, хочу купить: ${product.name}. Подскажите реквизиты для оплаты.`;
     const encodedMessage = encodeURIComponent(message);
     
-    // Открываем Telegram (можно изменить на WhatsApp)
-    window.open(`https://t.me/technomarket_support?text=${encodedMessage}`, '_blank');
+    // Открываем WhatsApp
+    window.open(`https://wa.me/79103561190?text=${encodedMessage}`, '_blank');
   };
 
   // Функция оформления заказа из корзины

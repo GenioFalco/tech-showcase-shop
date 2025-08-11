@@ -36,6 +36,7 @@ export const HeroSection = ({ onShopNow }: HeroSectionProps) => {
             <Button 
               variant="outline" 
               size="lg"
+              onClick={() => window.open('https://wa.me/79103561190', '_blank')}
               className="border-white/30 bg-white/10 text-white hover:bg-white/20"
             >
               Связаться с нами
