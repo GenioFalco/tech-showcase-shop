@@ -116,25 +116,21 @@ export const CheckoutDialog = ({
         description: `Ваш заказ ${orderNumber} принят. Мы свяжемся с вами в ближайшее время.`
       });
 
-      // Отправляем уведомление в Telegram (дополнительно)
-      const message = `🛒 Новый заказ ${orderNumber}
-
-👤 Клиент: ${formData.customerName}
-📞 Телефон: ${formData.customerPhone}
-${formData.customerEmail ? `📧 Email: ${formData.customerEmail}` : ''}
-
-📦 Товары:
-${cartItems.map(item => 
-  `• ${item.name} - ${item.quantity} шт. × ${formatPrice(item.price)} = ${formatPrice(item.price * item.quantity)}`
-).join('\n')}
-
-💰 Итого: ${formatPrice(totalAmount)}
-
-${formData.notes ? `📝 Примечания: ${formData.notes}` : ''}`;
+      // Отправляем уведомление в WhatsApp
+      const message = `🛒 Новый заказ ${orderNumber}\n\n` +
+        `👤 Клиент: ${formData.customerName}\n` +
+        `📞 Телефон: ${formData.customerPhone}\n` +
+        `${formData.customerEmail ? `📧 Email: ${formData.customerEmail}\n` : ''}` +
+        `\n📦 Товары:\n` +
+        cartItems.map(item => `• ${item.name} - ${item.quantity} шт. × ${formatPrice(item.price)} = ${formatPrice(item.price * item.quantity)}`).join('\n') +
+        `\n\n💰 Итого: ${formatPrice(totalAmount)}\n` +
+        `${formData.notes ? `\n📝 Примечания: ${formData.notes}` : ''}`;
 
       const encodedMessage = encodeURIComponent(message);
-      // Открываем Telegram для уведомления админа
-      window.open(`https://t.me/technomarket_support?text=${encodedMessage}`, '_blank');
+      // Открываем WhatsApp (веб/мобильный) для уведомления админа
+      const whatsappPhone = '79103561190';
+      const waUrl = `https://wa.me/${whatsappPhone}?text=${encodedMessage}`;
+      window.open(waUrl, '_blank');
 
       onOrderSuccess();
       onClose();

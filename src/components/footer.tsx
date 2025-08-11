@@ -97,8 +97,8 @@ export const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
             <div>
               <strong>ИП Алексеев А.Е</strong><br />
-              ИНН:602503644717 <br />
-              ОГРН:325344300080551 
+              ИНН: 602503644717 <br />
+              ОГРН: 325344300080551 
             </div>
             <div>
               <strong>Юридический адрес:</strong><br />
