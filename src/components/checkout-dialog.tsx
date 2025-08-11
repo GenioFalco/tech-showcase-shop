@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { ShoppingCart, CreditCard, Truck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import type { TablesInsert, Json } from "@/integrations/supabase/types";
 
 interface CartItem {
   id: string;
@@ -84,20 +85,29 @@ export const CheckoutDialog = ({
       // Генерируем номер заказа на клиенте
       const orderNumber = generateOrderNumber();
 
+      // Подготавливаем данные заказа строго по типу таблицы
+      const orderData: TablesInsert<'orders'> = {
+        order_number: orderNumber,
+        customer_name: formData.customerName.trim(),
+        customer_phone: formData.customerPhone.trim(),
+        customer_email: formData.customerEmail.trim() || null,
+        items: (cartItems.map(({ id, name, price, quantity, image }) => ({
+          id,
+          name,
+          price,
+          quantity,
+          image,
+        })) as unknown) as Json,
+        total_amount: totalAmount,
+        status: 'pending',
+        payment_status: 'unpaid',
+        notes: formData.notes.trim() || null,
+      };
+
       // Создаем заказ
       const { error: insertError } = await supabase
         .from('orders')
-        .insert({
-          order_number: orderNumber,
-          customer_name: formData.customerName.trim(),
-          customer_phone: formData.customerPhone.trim(),
-          customer_email: formData.customerEmail.trim() || null,
-          items: cartItems,
-          total_amount: totalAmount,
-          status: 'pending',
-          payment_status: 'unpaid',
-          notes: formData.notes.trim() || null
-        });
+        .insert(orderData);
 
       if (insertError) throw insertError;
 

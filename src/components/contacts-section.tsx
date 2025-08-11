@@ -15,24 +15,18 @@ import {
 } from "lucide-react";
 
 export const ContactsSection = () => {
-  const handleTelegramContact = () => {
-    window.open('https://t.me/technomarket_support', '_blank');
-  };
 
   const handleWhatsAppContact = () => {
-    window.open('https://wa.me/79999999999', '_blank');
+    window.open('https://wa.me/79103561190', '_blank');
   };
 
-  const handleInstagramContact = () => {
-    window.open('https://instagram.com/technomarket_official', '_blank');
-  };
 
   const handleEmailContact = () => {
     window.open('mailto:info@technomarket.ru', '_blank');
   };
 
   const handlePhoneContact = () => {
-    window.open('tel:+79999999999', '_blank');
+    window.open('tel:+79103561190', '_blank');
   };
 
   return (
@@ -64,22 +58,7 @@ export const ContactsSection = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex flex-col gap-3">
-                    <Button 
-                      variant="outline" 
-                      onClick={handleTelegramContact}
-                      className="justify-start h-auto p-4"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                          <MessageCircle className="w-5 h-5 text-white" />
-                        </div>
-                        <div className="text-left">
-                          <div className="font-medium">Telegram</div>
-                          <div className="text-sm text-muted-foreground">@technomarket_support</div>
-                        </div>
-                      </div>
-                    </Button>
-
+      
                     <Button 
                       variant="outline" 
                       onClick={handleWhatsAppContact}
@@ -91,7 +70,7 @@ export const ContactsSection = () => {
                         </div>
                         <div className="text-left">
                           <div className="font-medium">WhatsApp</div>
-                          <div className="text-sm text-muted-foreground">+7 (999) 999-99-99</div>
+                          <div className="text-sm text-muted-foreground">+7 (910) 356-11-90</div>
                         </div>
                       </div>
                     </Button>
@@ -113,7 +92,7 @@ export const ContactsSection = () => {
                     className="justify-start w-full"
                   >
                     <Phone className="w-4 h-4 mr-3" />
-                    +7 (999) 999-99-99
+                    +7 (910) 356-11-90
                   </Button>
 
                   <Button 
@@ -125,14 +104,7 @@ export const ContactsSection = () => {
                     info@technomarket.ru
                   </Button>
 
-                  <Button 
-                    variant="outline" 
-                    onClick={handleInstagramContact}
-                    className="justify-start w-full"
-                  >
-                    <Instagram className="w-4 h-4 mr-3" />
-                    @technomarket_official
-                  </Button>
+                
                 </CardContent>
               </Card>
 
@@ -213,29 +185,24 @@ export const ContactsSection = () => {
           </div>
 
           {/* Дополнительная информация */}
-          <Card className="mt-8 bg-muted/50">
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div className="flex flex-col items-center gap-2">
-                  <MapPin className="w-8 h-8 text-primary" />
-                  <h3 className="font-semibold">Офис</h3>
-                  <p className="text-sm text-muted-foreground">
-                    г. Москва, ул. Примерная, д. 123
-                  </p>
-                </div>
-                <div className="flex flex-col items-center gap-2">
-                  <Clock className="w-8 h-8 text-primary" />
-                  <h3 className="font-semibold">Быстрый ответ</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Отвечаем в течение 15 минут
-                  </p>
-                </div>
-                <div className="flex flex-col items-center gap-2">
-                  <MessageCircle className="w-8 h-8 text-primary" />
-                  <h3 className="font-semibold">Консультации</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Бесплатная помощь в выборе
-                  </p>
+          <Card className="mt-8 bg-muted/50 flex justify-center">
+            <CardContent className="p-6 w-full flex justify-center">
+              <div className="w-full flex justify-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center justify-center items-center">
+                  <div className="flex flex-col items-center gap-2">
+                    <Clock className="w-8 h-8 text-primary" />
+                    <h3 className="font-semibold">Быстрый ответ</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Отвечаем в течение 15 минут
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center gap-2">
+                    <MessageCircle className="w-8 h-8 text-primary" />
+                    <h3 className="font-semibold">Консультации</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Бесплатная помощь в выборе
+                    </p>
+                  </div>
                 </div>
               </div>
             </CardContent>

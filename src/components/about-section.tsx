@@ -36,10 +36,10 @@ export const AboutSection = () => {
               О компании
             </Badge>
             <h2 className="text-3xl font-bold mb-4 bg-gradient-hero bg-clip-text text-transparent">
-              Почему выбирают ТехноМаркет?
+              Почему выбирают x-brand?
             </h2>
             <p className="text-lg text-muted-foreground">
-              Мы продаем качественную электронику и аксессуары по выгодным ценам. 
+              Мы продаем качественную проверенную техниу и аксессуары по выгодным ценам. 
               Работаем по всей России уже более 5 лет.
             </p>
           </div>
@@ -49,9 +49,9 @@ export const AboutSection = () => {
             <CardContent className="p-8">
               <div className="prose prose-lg max-w-none">
                 <p className="text-foreground leading-relaxed mb-6">
-                  <strong>ТехноМаркет</strong> — это современный интернет-магазин электроники и аксессуаров, 
+                  <strong>x-brand</strong> — это современный интернет-магазин проверенной техники и аксессуаров, 
                   который предлагает широкий ассортимент качественных товаров по доступным ценам. 
-                  Мы специализируемся на продаже зарядных устройств, наушников, чехлов, 
+                  Мы специализируемся на продаже смартфонов, наушников, зарядных устройств, 
                   бытовой техники и современных гаджетов.
                 </p>
                 <p className="text-foreground leading-relaxed mb-6">

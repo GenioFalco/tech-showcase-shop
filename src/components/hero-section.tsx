@@ -17,16 +17,12 @@ export const HeroSection = ({ onShopNow }: HeroSectionProps) => {
           </Badge>
           
           <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-            x-brand магазин
-            <br />
-            <span className="bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-              всех товаров
-            </span>
+            x-brand — электроника и аксессуары
           </h1>
           
           <p className="mb-8 text-xl text-blue-100 lg:text-2xl">
-            Универсальный интернет-магазин для дома, спорта, красоты и электроники. 
-            Качество, доставка и гарантия на все!
+            Подборка проверенной техники и полезных товаров: смартфоны, аксессуары, решения для дома и спорта. 
+            Честные цены, быстрая доставка и официальная гарантия.
           </p>
           
           <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
@@ -69,7 +65,7 @@ export const HeroSection = ({ onShopNow }: HeroSectionProps) => {
                 <Truck className="h-6 w-6 text-white" />
               </div>
               <h3 className="font-semibold">Бесплатная доставка</h3>
-              <p className="text-sm text-blue-100">От 3000 ₽</p>
+              <p className="text-sm text-blue-100">заказы от 3000 ₽</p>
             </div>
           </div>
         </div>

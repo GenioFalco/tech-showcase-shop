@@ -16,16 +16,10 @@ import {
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const handleTelegramContact = () => {
-    window.open('https://t.me/technomarket_support', '_blank');
-  };
+
 
   const handleWhatsAppContact = () => {
-    window.open('https://wa.me/79999999999', '_blank');
-  };
-
-  const handleInstagramContact = () => {
-    window.open('https://instagram.com/technomarket_official', '_blank');
+    window.open('https://wa.me/79103561190', '_blank');
   };
 
   return (
@@ -38,35 +32,19 @@ export const Footer = () => {
               <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">Т</span>
               </div>
-              <span className="text-xl font-bold">ТехноМаркет</span>
+              <span className="text-xl font-bold">x-brand</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Качественная электроника и аксессуары по выгодным ценам. 
-              Работаем по всей России уже более 5 лет.
+            Подборка проверенной техники и полезных товаров: смартфоны, аксессуары, решения для дома и спорта. Честные цены, быстрая доставка и официальная гарантия.
             </p>
-            <div className="flex flex-wrap gap-2">
-              <Badge variant="outline" className="text-xs">
-                5+ лет на рынке
-              </Badge>
-              <Badge variant="outline" className="text-xs">
-                10K+ клиентов
-              </Badge>
-            </div>
+            
           </div>
 
           {/* Контакты */}
           <div className="space-y-4">
             <h3 className="font-semibold">Контакты</h3>
             <div className="space-y-3">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={handleTelegramContact}
-                className="justify-start p-0 h-auto text-left"
-              >
-                <MessageCircle className="w-4 h-4 mr-2" />
-                Telegram
-              </Button>
+
               <Button 
                 variant="ghost" 
                 size="sm" 
@@ -76,18 +54,10 @@ export const Footer = () => {
                 <MessageCircle className="w-4 h-4 mr-2" />
                 WhatsApp
               </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={handleInstagramContact}
-                className="justify-start p-0 h-auto text-left"
-              >
-                <Instagram className="w-4 h-4 mr-2" />
-                Instagram
-              </Button>
+
               <div className="flex items-center text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 mr-2" />
-                +7 (999) 999-99-99
+                +7 (910) 356-11-90
               </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <Mail className="w-4 h-4 mr-2" />
@@ -97,40 +67,7 @@ export const Footer = () => {
           </div>
 
           {/* Информация */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Информация</h3>
-            <div className="space-y-3">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="justify-start p-0 h-auto text-left"
-              >
-                <Shield className="w-4 h-4 mr-2" />
-                Гарантия
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="justify-start p-0 h-auto text-left"
-              >
-                <FileText className="w-4 h-4 mr-2" />
-                Доставка и оплата
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="justify-start p-0 h-auto text-left"
-              >
-                <Users className="w-4 h-4 mr-2" />
-                О компании
-              </Button>
-              <div className="flex items-center text-sm text-muted-foreground">
-                <MapPin className="w-4 h-4 mr-2" />
-                г. Москва
-              </div>
-            </div>
-          </div>
-
+         
           {/* Режим работы */}
           <div className="space-y-4">
             <h3 className="font-semibold">Режим работы</h3>
@@ -159,13 +96,13 @@ export const Footer = () => {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
             <div>
-              <strong>ИП Иванов Иван Иванович</strong><br />
-              ИНН: 123456789012<br />
-              ОГРНИП: 123456789012345
+              <strong>ИП Алексеев А.Е</strong><br />
+              ИНН: <br />
+              ОГРНИП: 
             </div>
             <div>
               <strong>Юридический адрес:</strong><br />
-              123456, г. Москва, ул. Примерная, д. 123, кв. 1
+              г. Липецк
             </div>
           </div>
           
@@ -186,7 +123,7 @@ export const Footer = () => {
 
         {/* Копирайт */}
         <div className="text-center text-sm text-muted-foreground">
-          <p>© {currentYear} ТехноМаркет. Все права защищены.</p>
+          <p>© {currentYear} x-brand. Все права защищены.</p>
           <p className="mt-1">
             Информация на сайте не является публичной офертой
           </p>
