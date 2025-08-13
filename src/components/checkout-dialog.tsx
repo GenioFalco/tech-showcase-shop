@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingCart, CreditCard, Truck } from "lucide-react";
+import { ShoppingCart, CreditCard, Truck, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import type { TablesInsert, Json } from "@/integrations/supabase/types";
@@ -41,6 +41,8 @@ export const CheckoutDialog = ({
     notes: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showMessengerChoice, setShowMessengerChoice] = useState(false);
+  const [orderMessage, setOrderMessage] = useState('');
   const { toast } = useToast();
 
   const formatPrice = (price: number) => {
@@ -111,12 +113,7 @@ export const CheckoutDialog = ({
 
       if (insertError) throw insertError;
 
-      toast({
-        title: "Заказ оформлен!",
-        description: `Ваш заказ ${orderNumber} принят. Мы свяжемся с вами в ближайшее время.`
-      });
-
-      // Отправляем уведомление в WhatsApp
+      // Подготавливаем сообщение для мессенджеров
       const message = `🛒 Новый заказ ${orderNumber}\n\n` +
         `👤 Клиент: ${formData.customerName}\n` +
         `📞 Телефон: ${formData.customerPhone}\n` +
@@ -126,14 +123,17 @@ export const CheckoutDialog = ({
         `\n\n💰 Итого: ${formatPrice(totalAmount)}\n` +
         `${formData.notes ? `\n📝 Примечания: ${formData.notes}` : ''}`;
 
-      const encodedMessage = encodeURIComponent(message);
-      // Открываем WhatsApp (веб/мобильный) для уведомления админа
-      const whatsappPhone = '79103561190';
-      const waUrl = `https://wa.me/${whatsappPhone}?text=${encodedMessage}`;
-      window.open(waUrl, '_blank');
+      setOrderMessage(message);
+
+      toast({
+        title: "Заказ оформлен!",
+        description: `Ваш заказ ${orderNumber} принят. Выберите удобный мессенджер для связи.`
+      });
+
+      // Показываем выбор мессенджера
+      setShowMessengerChoice(true);
 
       onOrderSuccess();
-      onClose();
       
       // Очищаем форму
       setFormData({
@@ -162,6 +162,113 @@ export const CheckoutDialog = ({
       setIsSubmitting(false);
     }
   };
+
+  const handleMessengerChoice = (messenger: 'whatsapp' | 'signal' | 'max') => {
+    const encodedMessage = encodeURIComponent(orderMessage);
+    const phone = '79103561190';
+    
+    let url = '';
+    switch (messenger) {
+      case 'whatsapp':
+        url = `https://wa.me/${phone}?text=${encodedMessage}`;
+        break;
+      case 'signal':
+        url = 'https://signal.me/#eu/1n5PXjOYdfSRSj2_BmvYC_dqUYWiJbHwZXCKrA-tL5kIQJRJkHtLSo0nQpsmsM1v';
+        break;
+      case 'max':
+        url = 'https://max.ru/u/f9LHodD0cOJwcMnXJoJdIAymv3m8JU5HNwqzf8HRdYbdui0nmIJJ6HytQLU';
+        break;
+    }
+    
+    window.open(url, '_blank');
+    setShowMessengerChoice(false);
+    onClose();
+  };
+
+  if (showMessengerChoice) {
+    return (
+      <Dialog open={true} onOpenChange={() => {
+        setShowMessengerChoice(false);
+        onClose();
+      }}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <MessageCircle className="w-5 h-5" />
+              Выберите мессенджер
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground text-center">
+              Заказ успешно оформлен! Выберите удобный мессенджер для связи с нами:
+            </p>
+            
+            <div className="grid gap-3">
+              <Button 
+                onClick={() => handleMessengerChoice('whatsapp')}
+                className="justify-start h-auto p-4"
+                variant="outline"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-medium">WhatsApp</div>
+                    <div className="text-sm text-muted-foreground">+7 (910) 356-11-90</div>
+                  </div>
+                </div>
+              </Button>
+
+              <Button 
+                onClick={() => handleMessengerChoice('signal')}
+                className="justify-start h-auto p-4"
+                variant="outline"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-medium">Signal</div>
+                    <div className="text-sm text-muted-foreground">Безопасные сообщения</div>
+                  </div>
+                </div>
+              </Button>
+
+              <Button 
+                onClick={() => handleMessengerChoice('max')}
+                className="justify-start h-auto p-4"
+                variant="outline"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-medium">Max</div>
+                    <div className="text-sm text-muted-foreground">Мессенджер Max</div>
+                  </div>
+                </div>
+              </Button>
+            </div>
+
+            <Button 
+              onClick={() => {
+                setShowMessengerChoice(false);
+                onClose();
+              }}
+              variant="ghost"
+              className="w-full"
+            >
+              Закрыть
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

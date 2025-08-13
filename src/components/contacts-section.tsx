@@ -18,6 +18,13 @@ export const ContactsSection = () => {
     window.open('https://wa.me/79103561190', '_blank');
   };
 
+  const handleSignalContact = () => {
+    window.open('https://signal.me/#eu/1n5PXjOYdfSRSj2_BmvYC_dqUYWiJbHwZXCKrA-tL5kIQJRJkHtLSo0nQpsmsM1v', '_blank');
+  };
+
+  const handleMaxContact = () => {
+    window.open('https://max.ru/u/f9LHodD0cOJwcMnXJoJdIAymv3m8JU5HNwqzf8HRdYbdui0nmIJJ6HytQLU', '_blank');
+  };
 
   const handlePhoneContact = () => {
     window.open('tel:+79103561190', '_blank');
@@ -52,7 +59,6 @@ export const ContactsSection = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex flex-col gap-3">
-      
                     <Button 
                       variant="outline" 
                       onClick={handleWhatsAppContact}
@@ -65,6 +71,38 @@ export const ContactsSection = () => {
                         <div className="text-left">
                           <div className="font-medium">WhatsApp</div>
                           <div className="text-sm text-muted-foreground">+7 (910) 356-11-90</div>
+                        </div>
+                      </div>
+                    </Button>
+
+                    <Button 
+                      variant="outline" 
+                      onClick={handleSignalContact}
+                      className="justify-start h-auto p-4"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                          <MessageCircle className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="text-left">
+                          <div className="font-medium">Signal</div>
+                          <div className="text-sm text-muted-foreground">Безопасные сообщения</div>
+                        </div>
+                      </div>
+                    </Button>
+
+                    <Button 
+                      variant="outline" 
+                      onClick={handleMaxContact}
+                      className="justify-start h-auto p-4"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                          <MessageCircle className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="text-left">
+                          <div className="font-medium">Max</div>
+                          <div className="text-sm text-muted-foreground">Мессенджер Max</div>
                         </div>
                       </div>
                     </Button>
