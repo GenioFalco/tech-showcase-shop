@@ -12,6 +12,7 @@ import { ImageUpload } from "@/components/image-upload";
 import { CategoryManager } from "@/components/category-manager";
 import { CategorySelector } from "@/components/category-selector";
 import { OrdersManager } from "@/components/orders-manager";
+import { LegalDocumentsManager } from "@/components/legal-documents-manager";
 
 interface Product {
   id: string;
@@ -255,6 +256,7 @@ export const AdminPanel = ({ onProductsUpdate, onLogout }: AdminPanelProps) => {
             <TabsTrigger value="products">Товары</TabsTrigger>
             <TabsTrigger value="categories">Категории</TabsTrigger>
             <TabsTrigger value="orders">Заказы</TabsTrigger>
+            <TabsTrigger value="documents">Документы</TabsTrigger>
           </TabsList>
           
           <TabsContent value="products" className="space-y-6">
@@ -438,6 +440,10 @@ export const AdminPanel = ({ onProductsUpdate, onLogout }: AdminPanelProps) => {
           
           <TabsContent value="orders" className="space-y-6">
             <OrdersManager />
+          </TabsContent>
+          
+          <TabsContent value="documents" className="space-y-6">
+            <LegalDocumentsManager />
           </TabsContent>
         </Tabs>
       </div>

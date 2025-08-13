@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 import { 
   MessageCircle, 
   Phone, 
@@ -102,14 +103,14 @@ export const Footer = () => {
           </div>
           
           <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-            <Button variant="ghost" size="sm" className="text-xs">
-              Политика конфиденциальности
+            <Button asChild variant="ghost" size="sm" className="text-xs">
+              <Link to="/privacy-policy">Политика конфиденциальности</Link>
             </Button>
-            <Button variant="ghost" size="sm" className="text-xs">
-              Пользовательское соглашение
+            <Button asChild variant="ghost" size="sm" className="text-xs">
+              <Link to="/terms-of-service">Пользовательское соглашение</Link>
             </Button>
-            <Button variant="ghost" size="sm" className="text-xs">
-              Публичная оферта
+            <Button asChild variant="ghost" size="sm" className="text-xs">
+              <Link to="/public-offer">Публичная оферта</Link>
             </Button>
           </div>
         </div>
